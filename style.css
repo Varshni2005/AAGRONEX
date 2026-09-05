@@ -1,0 +1,213 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4fff4;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(90deg, #2e7d32, #66bb6a);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #1b5e20;
+}
+
+nav a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background-color: #66bb6a;
+}
+
+.hero {
+    background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6') center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 300px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin: 15px 0;
+}
+
+footer {
+    background: #1b5e20;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* INPUT SYSTEM */
+.input-system {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.input-system h2 {
+    font-size: 32px;
+    color: #2e7d32;
+}
+
+.input-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* BIG CARDS */
+.input-card {
+    width: 250px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.input-card img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.input-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: #e8f5e9;
+}
+
+/* INPUT PANEL */
+.input-panel {
+    margin-top: 40px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-panel input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.input-panel button {
+    padding: 12px 20px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.input-panel button:hover {
+    background: #1b5e20;
+}
+
+/* RESULT */
+#result {
+    display: none;
+    margin-top: 20px;
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 10px;
+}
+.input-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    transition: 0.4s;
+}
+
+/* Glow + hover effect */
+.input-card:hover img {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.2));
+}
+.input-card {
+    position: relative;
+    overflow: hidden;
+}
+.soil-card {
+    width: 350px;
+}
+
+/* soft glow circle */
+.input-card::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: rgba(102, 187, 106, 0.2);
+    border-radius: 50%;
+    top: -30px;
+    left: -30px;
+}
+.soil-img {
+    width: 50%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.soil-img:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}

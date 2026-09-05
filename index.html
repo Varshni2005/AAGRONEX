@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agronex - Smart Agriculture</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+    <h1>Agronex 🌱</h1>
+    <p>Smart AI-Powered Farming Solutions</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="hero">
+    <h1>Empowering Farmers with AI & Smart Agriculture</h1>
+</div>
+
+<section class="input-system">
+
+    <h2>🌾 Smart Farmer Input System</h2>
+    <p>Choose how you want to interact with AGRONEX</p>
+
+    <div class="input-grid">
+
+        <!-- TEXT -->
+        <div class="input-card" onclick="showTab('text')">
+            <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png">
+            <h3>Text Query</h3>
+            <p>Type your crop problem in your own language</p>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="input-card" onclick="showTab('image')">
+            <img src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png">
+            <h3>Image Detection</h3>
+            <p>Upload leaf image to detect disease instantly</p>
+        </div>
+
+        <!-- VOICE -->
+        <div class="input-card" onclick="showTab('voice')">
+            <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+            <h3>Voice Input</h3>
+            <p>Speak your problem using voice assistance</p>
+        </div>
+
+       <div class="input-card" onclick="showTab('soil')">
+             <img src="images/soil.jpg" class="soil-img">
+             <h3>Soil Testing</h3>
+             <p>Analyze soil health and get fertilizer recommendations</p>
+        </div>
+
+        <div class="input-card" onclick="showTab('sms')">
+    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png">
+    <h3>SMS Support</h3>
+    <p>Send advisory through low-network SMS simulation</p>
+</div>
+
+<div class="input-card" onclick="showTab('ivr')">
+    <img src="https://cdn-icons-png.flaticon.com/512/159/159832.png">
+    <h3>IVR Call</h3>
+    <p>Voice-based farmer advisory call simulation</p>
+</div>
+
+    </div>
+
+    <!-- INPUT PANEL -->
+    <div class="input-panel">
+
+        <div class="tab-content" id="text">
+            <h3>📝 Enter Your Problem</h3>
+            <input type="text" id="textProblem" placeholder="Eg: Yellow spots on leaves">
+            <button onclick="sendText()">Get Advisory</button>
+        </div>
+
+
+
+        <div class="tab-content" id="voice" style="display:none;">
+    <h3>🎤 Voice Assistant</h3>
+    <p>Speak your crop issue, then edit if needed and get AI advisory</p>
+
+    <div style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
+        <button onclick="startVoice()">🎤 Start Recording</button>
+        <button onclick="stopVoice()">🛑 Stop Recording</button>
+    </div>
+
+    <input 
+        type="text" 
+        id="voiceText" 
+        placeholder="Recognized voice text will appear here"
+        style="margin-top:15px;"
+    >
+
+    <button onclick="sendVoiceText()">Get Advisory</button>
+
+    <p id="spokenText" style="margin-top:15px; color:#2e7d32; font-weight:bold;"></p>
+</div>
+ 
+<div class="tab-content" id="image" style="display:none;">
+    <h3>📸 Upload Crop Image</h3>
+
+    
+
+    <br><br>
+
+    <input type="file" id="leafImage" accept="image/*" onchange="previewImage(event)">
+
+    <img id="preview"
+         style="display:none; width:220px; margin-top:15px; border-radius:10px;">
+
+    <br><br>
+    <button onclick="analyzeImage()">Analyze Image</button>
+    
+</div>
+
+      <div class="tab-content" id="soil" style="display:none;">
+    <h3>🌱 Soil Testing</h3>
+    <p>Upload soil image and choose soil type</p>
+
+    
+
+    <br><br>
+
+    <input type="file" id="soilImage" accept="image/*" onchange="previewImage(event)">
+
+    <img id="preview"
+         style="display:none; width:220px; margin-top:15px; border-radius:10px;">
+
+    <br><br>
+    <button onclick="sendSoil()">Analyze Soil</button>
+</div>
+
+        <div id="result">
+            <h3>🌱 AI Advisory Result</h3>
+            <p><b>Disease:</b> Leaf Blight</p>
+            <p><b>Solution:</b> Apply fungicide & maintain proper irrigation.</p>
+        </div>
+        <div class="tab-content" id="sms" style="display:none;">
+    <h3>📩 SMS Advisory</h3>
+    <input type="text" id="smsText" placeholder="Type SMS query">
+    <button onclick="sendSMS()">Send SMS</button>
+</div>
+
+<div class="tab-content" id="ivr" style="display:none;">
+    <h3>☎️ Smart IVR Farmer Helpline</h3>
+    <p>Multi-level keypad advisory simulation</p>
+
+    <div style="display:flex; gap:10px; justify-content:center;">
+        <button onclick="startIVR()">📞 Start IVR Call</button>
+        <button onclick="goBackIVR()">⬅️ Back</button>
+        <button onclick="endIVR()">📴 End Call</button>
+    </div>
+
+    <div id="ivrMenu" style="margin-top:20px;"></div>
+
+    <p id="callStatus" style="margin-top:15px; font-weight:bold; color:#2e7d32;"></p>
+</div>
+
+</section>
+
+<div class="section">
+    <h2>Our Services</h2>
+    <div class="cards">
+        <div class="card">
+            <img src="images/soil1.jpg">
+            <h3>Soil Analysis</h3>
+            <p>Get detailed soil health insights and recommendations.</p>
+        </div>
+
+        <div class="card">
+            <img src="images/soil2.jpg">
+            <h3>Crop Advisory</h3>
+            <p>AI-powered crop suggestions and disease detection.</p>
+        </div>
+
+        <div class="card">
+            <img src="images/soil3.png">
+            <h3>Weather Insights</h3>
+            <p>Real-time weather updates for better planning.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section" style="background:#e8f5e9;">
+    <h2>Why Choose Agronex?</h2>
+    <p>We combine AI technology with agricultural expertise to help farmers make smarter decisions, increase yield, and reduce risks.</p>
+</div>
+
+<footer>
+    <p>© 2026 Agronex | Smart Farming for the Future 🌾</p>
+</footer>
+
+<script>
+function showTab(tabId) {
+    let tabs = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = "none";
+    }
+    document.getElementById(tabId).style.display = "block";
+}
+
+// TEXT → BACKEND
+async function sendText() {
+    let problem = document.getElementById("textProblem").value;
+
+    let res = await fetch("http://127.0.0.1:5000/api/query/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            query: problem
+        })
+    });
+
+    let data = await res.json();
+
+    if (data.success) {
+        let item = data.data[0];
+
+        showResult(
+`Crop: ${item.crop}
+Issue: ${item.issue}
+Symptom: ${item.symptom}
+Solution: ${item.solution}`
+        );
+    } else {
+        showResult("No matching issue found");
+    }
+}
+
+// SOIL → BACKEND
+
+async function sendSoil() {
+    const fileInput = document.getElementById("soilImage");
+
+    if (!fileInput.files.length) {
+        showResult("Please upload soil image first");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/predict-soil", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        showResult(
+`Soil: ${data.soil_type}
+Age: ${data.age}
+pH: ${data.ph}
+Color: ${data.color}
+Nutrients: ${data.nutrients}
+Recommended Crops: ${data.crops}`
+        );
+    } catch (error) {
+        showResult("Error connecting to soil CNN service");
+        console.error(error);
+    }
+}
+
+let recognition;
+
+function startVoice() {
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        showResult("Voice recognition not supported.");
+        return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = true;
+    recognition.continuous = true;
+
+    recognition.onstart = function () {
+        document.getElementById("spokenText").innerText = "🎤 Listening...";
+    };
+
+    recognition.onresult = function (event) {
+        let text = "";
+        for (let i = 0; i < event.results.length; i++) {
+            text += event.results[i][0].transcript;
+        }
+
+        document.getElementById("voiceText").value = text;
+    };
+
+    recognition.onerror = function () {
+        document.getElementById("spokenText").innerText =
+            "❌ Voice recognition failed";
+    };
+
+    recognition.onend = function () {
+        document.getElementById("spokenText").innerText =
+            "✅ Recording stopped. You can edit and get advisory.";
+    };
+
+    recognition.start();
+}
+
+function stopVoice() {
+    if (recognition) {
+        recognition.stop();
+    }
+}
+
+async function sendVoiceText() {
+    let problem = document.getElementById("voiceText").value;
+
+    let res = await fetch("http://127.0.0.1:5000/api/query/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            query: problem
+        })
+    });
+
+    let data = await res.json();
+
+    if (data.success) {
+        let item = data.data[0];
+
+        showResult(
+`Crop: ${item.crop}
+Issue: ${item.issue}
+Symptom: ${item.symptom}
+Solution: ${item.solution}`
+        );
+    } else {
+        showResult("No matching issue found");
+    }
+}
+
+function previewImage(event) {
+    let file = event.target.files[0];
+    let preview = document.getElementById("preview");
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+    }
+}
+
+
+async function analyzeImage() {
+    const fileInput = document.getElementById("leafImage");
+
+    if (!fileInput.files.length) {
+        showResult("Please upload a leaf image first");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/predict-leaf", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        showResult(
+`Disease: ${data.disease}
+Solution: ${data.solution}`
+        );
+    } catch (error) {
+        showResult("Error connecting to CNN service");
+        console.error(error);
+    }
+}
+
+async function sendSMS() {
+    let message = document.getElementById("smsText").value;
+
+    let res = await fetch("http://127.0.0.1:5000/api/query/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            query: message
+        })
+    });
+
+    let data = await res.json();
+
+    if (data.success) {
+        let item = data.data[0];
+
+        showResult(
+`Crop: ${item.crop}
+Issue: ${item.issue}
+Symptom: ${item.symptom}
+Solution: ${item.solution}`
+        );
+    } else {
+        showResult("No matching issue found");
+    }
+}
+
+const ivrTree = {
+    main: {
+        1: { text: "Weather", next: "weather" },
+        2: { text: "Crop Disease", next: "cropDisease" },
+        3: { text: "Soil Advisory", next: "soil" },
+        4: { text: "Fertilizer", next: "fertilizer" },
+        5: { text: "Pest Control", next: "pest" },
+        6: { text: "Irrigation", next: "irrigation" },
+        7: { text: "Government Schemes", next: "scheme" },
+        8: { text: "Harvesting", next: "harvest" },
+        9: { text: "Market Price", next: "market" }
+    },
+
+    weather: {
+        1: { text: "Rain Forecast", result: "Rain expected tomorrow." },
+        2: { text: "Temperature", result: "31°C, suitable for paddy." },
+        3: { text: "Humidity", result: "Humidity high, fungal risk medium." },
+        4: { text: "Wind Speed", result: "Low wind speed, spraying safe." },
+        5: { text: "Cloud Cover", result: "Cloud cover 40%." },
+        6: { text: "Sunlight", result: "Good sunlight for crops." },
+        7: { text: "Storm Alert", result: "No storm expected." },
+        8: { text: "Weekly Forecast", result: "Light showers this week." },
+        9: { text: "Monthly Outlook", result: "Normal seasonal rainfall expected." }
+    },
+
+    cropDisease: {
+        1: { text: "Paddy", next: "paddyDisease" },
+        2: { text: "Wheat", next: "wheatDisease" },
+        3: { text: "Tomato", next: "tomatoDisease" },
+        4: { text: "Cotton", next: "cottonDisease" },
+        5: { text: "Banana", next: "bananaDisease" },
+        6: { text: "Sugarcane", result: "Red rot risk, use resistant variety." },
+        7: { text: "Groundnut", result: "Leaf spot, spray Mancozeb." },
+        8: { text: "Maize", result: "Fall armyworm risk, use pheromone traps." },
+        9: { text: "Chilli", result: "Leaf curl virus, use Neem oil." }
+    },
+
+    paddyDisease: {
+        1: { text: "Yellow Spots", result: "Leaf blight, spray Copper Oxychloride." },
+        2: { text: "Brown Leaf", result: "Brown spot disease, use Carbendazim." },
+        3: { text: "Stem Rot", result: "Improve drainage and apply fungicide." },
+        4: { text: "Pest Attack", result: "Use Chlorpyrifos spray." },
+        5: { text: "Leaf Curl", result: "Check pest infestation and use Neem oil." },
+        6: { text: "Low Growth", result: "Apply nitrogen fertilizer." },
+        7: { text: "Root Rot", result: "Improve water drainage." },
+        8: { text: "Wilt", result: "Use disease resistant seeds." },
+        9: { text: "Discoloration", result: "Possible zinc deficiency." }
+    },
+
+    wheatDisease: {
+        1: { text: "Rust", result: "Use Propiconazole." },
+        2: { text: "Yellowing", result: "Nitrogen deficiency." },
+        3: { text: "Wilt", result: "Check irrigation schedule." },
+        4: { text: "Powdery Mildew", result: "Use Sulphur fungicide." },
+        5: { text: "Leaf Curl", result: "Aphid issue likely." },
+        6: { text: "Low Tillers", result: "Apply urea." },
+        7: { text: "Stem Weak", result: "Use balanced fertilizer." },
+        8: { text: "Root Issue", result: "Improve soil aeration." },
+        9: { text: "Grain Spot", result: "Use fungicide spray." }
+    },
+
+    tomatoDisease: {
+        1: { text: "Leaf Curl", result: "Use Neem oil." },
+        2: { text: "Blight", result: "Spray Mancozeb." },
+        3: { text: "Fruit Rot", result: "Reduce moisture." },
+        4: { text: "Yellow Leaves", result: "Nitrogen deficiency." },
+        5: { text: "Wilt", result: "Check root fungus." },
+        6: { text: "Low Flowering", result: "Use potash fertilizer." },
+        7: { text: "Pest Holes", result: "Use pheromone traps." },
+        8: { text: "Leaf Burn", result: "Reduce midday watering." },
+        9: { text: "Whiteflies", result: "Use sticky traps." }
+    },
+
+    cottonDisease: {
+        1: { text: "Bollworm", result: "Use Spinosad spray." },
+        2: { text: "Leaf Curl", result: "Neem oil recommended." },
+        3: { text: "Yellow Leaf", result: "Micronutrient spray." },
+        4: { text: "Low Boll", result: "Apply potash." },
+        5: { text: "Wilt", result: "Improve drainage." },
+        6: { text: "Whitefly", result: "Use Imidacloprid." },
+        7: { text: "Stem Weak", result: "Balanced fertilizer needed." },
+        8: { text: "Root Rot", result: "Use Trichoderma." },
+        9: { text: "Slow Growth", result: "Apply urea." }
+    },
+
+    bananaDisease: {
+        1: { text: "Leaf Spot", result: "Spray Propiconazole." },
+        2: { text: "Panama Wilt", result: "Improve drainage." },
+        3: { text: "Yellow Leaf", result: "Magnesium deficiency." },
+        4: { text: "Stem Rot", result: "Use fungicide drench." },
+        5: { text: "Low Bunch", result: "Apply potash." },
+        6: { text: "Fruit Spot", result: "Use Copper spray." },
+        7: { text: "Leaf Tear", result: "Wind damage, provide support." },
+        8: { text: "Slow Growth", result: "Use compost." },
+        9: { text: "Wilt", result: "Root fungus possible." }
+    },
+
+    soil: {
+        1: { text: "Red Soil", result: "Best for millets." },
+        2: { text: "Black Soil", result: "Best for cotton." },
+        3: { text: "Clay Soil", result: "Good for paddy." },
+        4: { text: "Sandy Soil", result: "Good for groundnut." },
+        5: { text: "Loamy Soil", result: "Best for vegetables." },
+        6: { text: "pH", result: "Ideal pH 6.5–7." },
+        7: { text: "Nitrogen", result: "Low, apply urea." },
+        8: { text: "Phosphorus", result: "Use DAP." },
+        9: { text: "Potassium", result: "Use potash." }
+    },
+
+    fertilizer: {
+        1: { text: "Paddy", result: "Use NPK 20:20:0." },
+        2: { text: "Wheat", result: "Use urea top dressing." },
+        3: { text: "Tomato", result: "Use compost + potash." },
+        4: { text: "Cotton", result: "Apply DAP." },
+        5: { text: "Banana", result: "High potash fertilizer." },
+        6: { text: "Maize", result: "Use nitrogen rich fertilizer." },
+        7: { text: "Sugarcane", result: "Apply NPK + organic manure." },
+        8: { text: "Groundnut", result: "Use gypsum." },
+        9: { text: "Chilli", result: "Micronutrient foliar spray." }
+    },
+
+    pest: {
+        1: { text: "Stem Borer", result: "Use Chlorantraniliprole." },
+        2: { text: "Aphids", result: "Use Imidacloprid." },
+        3: { text: "Whiteflies", result: "Neem oil spray." },
+        4: { text: "Caterpillar", result: "Use Spinosad." },
+        5: { text: "Thrips", result: "Sticky traps recommended." },
+        6: { text: "Mites", result: "Use sulphur spray." },
+        7: { text: "Leaf Miner", result: "Neem extract spray." },
+        8: { text: "Fruit Fly", result: "Pheromone traps." },
+        9: { text: "Armyworm", result: "Use Emamectin Benzoate." }
+    },
+
+    irrigation: {
+        1: { text: "Paddy", result: "Standing water required." },
+        2: { text: "Wheat", result: "Irrigate every 7 days." },
+        3: { text: "Tomato", result: "Drip irrigation best." },
+        4: { text: "Cotton", result: "Water every 5 days." },
+        5: { text: "Banana", result: "Daily moderate watering." },
+        6: { text: "Sugarcane", result: "Weekly irrigation." },
+        7: { text: "Groundnut", result: "Light irrigation." },
+        8: { text: "Maize", result: "Critical during tasseling." },
+        9: { text: "Chilli", result: "Avoid overwatering." }
+    },
+
+    scheme: {
+        1: { text: "PM Kisan", result: "Farmer subsidy support." },
+        2: { text: "Crop Insurance", result: "Insurance available." },
+        3: { text: "Tractor Subsidy", result: "Machinery subsidy available." },
+        4: { text: "Seed Subsidy", result: "Certified seeds subsidized." },
+        5: { text: "Loan", result: "Low interest crop loan." },
+        6: { text: "Solar Pump", result: "Solar irrigation support." },
+        7: { text: "Organic Farming", result: "Organic incentives available." },
+        8: { text: "Drip Support", result: "Drip irrigation subsidy." },
+        9: { text: "Storage", result: "Warehouse support available." }
+    },
+
+    harvest: {
+        1: { text: "Paddy", result: "Harvest after grain hardening." },
+        2: { text: "Wheat", result: "Golden stage harvest." },
+        3: { text: "Tomato", result: "Harvest red ripe fruits." },
+        4: { text: "Cotton", result: "Pick after boll opens." },
+        5: { text: "Banana", result: "Harvest mature green bunches." },
+        6: { text: "Sugarcane", result: "Harvest after 10–12 months." },
+        7: { text: "Groundnut", result: "Pull when leaves yellow." },
+        8: { text: "Maize", result: "Harvest dry cobs." },
+        9: { text: "Chilli", result: "Harvest mature red pods." }
+    },
+
+    market: {
+        1: { text: "Paddy", result: "₹2200/quintal" },
+        2: { text: "Wheat", result: "₹2400/quintal" },
+        3: { text: "Tomato", result: "₹30/kg" },
+        4: { text: "Cotton", result: "₹7000/quintal" },
+        5: { text: "Banana", result: "₹40/kg" },
+        6: { text: "Sugarcane", result: "₹350/quintal" },
+        7: { text: "Groundnut", result: "₹6000/quintal" },
+        8: { text: "Maize", result: "₹2100/quintal" },
+        9: { text: "Chilli", result: "₹120/kg" }
+    }
+};
+  
+let currentMenu = "main";
+let menuHistory = [];
+
+function speakText(text) {
+    window.speechSynthesis.cancel();
+
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-IN";
+    speech.rate = 0.9;
+    window.speechSynthesis.speak(speech);
+}
+
+function renderMenu(menuName) {
+    currentMenu = menuName;
+    const menu = ivrTree[menuName];
+    let html = "<p><b>Select option:</b></p>";
+
+    for (let key in menu) {
+        html += `
+            <button onclick="handleIVR(${key})"
+                style="margin:6px; padding:10px 16px;">
+                ${key}️⃣ ${menu[key].text}
+            </button>
+        `;
+    }
+
+    // universal others option
+    html += `
+        <button onclick="handleIVR(0)"
+            style="margin:6px; padding:10px 16px; background:#ff9800; color:white;">
+            0️⃣ Others / Talk to Expert
+        </button>
+    `;
+
+    document.getElementById("ivrMenu").innerHTML = html;
+}
+
+function startIVR() {
+    menuHistory = [];
+    document.getElementById("callStatus").innerText =
+        "📞 IVR Call Connected Successfully";
+
+    renderMenu("main");
+
+    speakText(
+        "Welcome to Agronex farmer helpline. Please choose your support option."
+    );
+}
+
+function handleIVR(choice) {
+    // universal fallback
+    if (choice === 0) {
+        showResult(`
+Farmer issue requires expert assistance.
+
+📞 Expert Helpline: +91 98765 43210
+☎️ Diverting call to nearest agriculture officer...
+🌾 Krishi Support Center Connected Successfully
+        `);
+
+        speakText(
+            "Your call is being diverted to agriculture expert support center."
+        );
+        return;
+    }
+
+    const selected = ivrTree[currentMenu][choice];
+
+    if (!selected) return;
+
+    if (selected.next) {
+        menuHistory.push(currentMenu);
+        renderMenu(selected.next);
+        speakText("Selected " + selected.text);
+    } else if (selected.result) {
+        showResult(selected.result);
+        speakText(selected.result);
+    }
+}
+
+function goBackIVR() {
+    if (menuHistory.length > 0) {
+        const previous = menuHistory.pop();
+        renderMenu(previous);
+        speakText("Going back to previous menu");
+    }
+}
+
+function endIVR() {
+    window.speechSynthesis.cancel();
+    document.getElementById("ivrMenu").innerHTML = "";
+    document.getElementById("callStatus").innerText =
+        "📴 Call ended by farmer";
+}
+
+
+// RESULT DISPLAY
+function showResult(text) {
+    let box = document.getElementById("result");
+    box.style.display = "block";
+    box.innerHTML = `
+        <h3>🌱 AI Advisory Result</h3>
+        <pre style="white-space: pre-wrap; font-family: Segoe UI;">${text}</pre>
+    `;
+}
+</script>
+</body>
+</html>
