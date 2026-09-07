@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 
 # REAL PRETRAINED CNN
-cnn_model = None
+cnn_model = models.mobilenet_v2(weights=None)
 cnn_model.eval()
 
 transform = transforms.Compose([
