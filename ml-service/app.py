@@ -11,21 +11,31 @@ import torchvision.transforms as transforms
 app = Flask(__name__)
 CORS(app)
 
-# REAL PRETRAINED CNN
-cnn_model = models.mobilenet_v2(weights=None)
-cnn_model.eval()
+# CNN model will be initialized only when image analysis is requested
+cnn_model = None
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor()
 ])
 
+def get_cnn_model():
+    global cnn_model
+
+    if cnn_model is None:
+        cnn_model = models.mobilenet_v2(weights=None)
+        cnn_model.eval()
+
+    return cnn_model
+
 def extract_cnn_score(img):
+    model = get_cnn_model()
+
     pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     x = transform(pil).unsqueeze(0)
 
     with torch.no_grad():
-        features = cnn_model.features(x)
+        features = model.features(x)
         score = features.mean().item()
 
     return score
