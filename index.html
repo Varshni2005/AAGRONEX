@@ -213,7 +213,7 @@ function showTab(tabId) {
 async function sendText() {
     let problem = document.getElementById("textProblem").value;
 
-    let res = await fetch("http://127.0.0.1:5000/api/query/search", {
+    let res = await fetch("https://aagronex.onrender.com/api/query/search", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -254,7 +254,7 @@ async function sendSoil() {
     formData.append("image", file);
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/predict-soil", {
+        const res = await fetch("http://aagronex-ml.onrender.com/predict-soil", {
             method: "POST",
             body: formData
         });
@@ -326,7 +326,7 @@ function stopVoice() {
 async function sendVoiceText() {
     let problem = document.getElementById("voiceText").value;
 
-    let res = await fetch("http://127.0.0.1:5000/api/query/search", {
+    let res = await fetch("https://aagronex.onrender.com/api/query/search", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -376,7 +376,7 @@ async function analyzeImage() {
     formData.append("image", file);
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/predict-leaf", {
+        const res = await fetch("http://aagronex-ml.onrender.com/predict-leaf", {
             method: "POST",
             body: formData
         });
@@ -396,7 +396,7 @@ Solution: ${data.solution}`
 async function sendSMS() {
     let message = document.getElementById("smsText").value;
 
-    let res = await fetch("http://127.0.0.1:5000/api/query/search", {
+    let res = await fetch("https://aagronex.onrender.com/api/query/search", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
